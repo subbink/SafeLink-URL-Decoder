@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import urllib.parse
 
 # Prompt the user to enter the SafeLink URL
@@ -6,7 +8,7 @@ safelink = input("Enter the SafeLink URL: ")
 try:
     # Parse the SafeLink URL to extract its components
     parsed_url = urllib.parse.urlparse(safelink)
-    
+
     # Extract the query parameters from the SafeLink URL
     query_params = urllib.parse.parse_qs(parsed_url.query)
 
@@ -19,10 +21,10 @@ try:
         decoded_url = urllib.parse.unquote(query_params['url'][0])
     else:
         raise ValueError("The provided SafeLink URL does not contain 'a' or 'url' parameter.")
-    
+
     # Parse the decoded URL to check for nested query parameters
     nested_query_params = urllib.parse.parse_qs(urllib.parse.urlparse(decoded_url).query)
-    
+
     # If a nested 'u' parameter exists, decode it
     if 'u' in nested_query_params:
         nested_url = nested_query_params['u'][0]
